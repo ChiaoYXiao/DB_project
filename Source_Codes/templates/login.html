@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>帳號登入</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css')}}">
+    <script>
+        function clearInput() {
+            var inputElement = document.getElementById('id');
+            inputElement.value = ''
+            var inputElement = document.getElementById('pwd');
+            inputElement.value = '';
+        }
+    </script>
+</head>
+
+<body>
+    <form action="/login_check" method="POST">
+        <div class="form-box login">
+            <h2>登入</h2>
+            <div class="input-box">
+                <span class="icon"></span>
+                <input type="account" name="id" required>
+                <label>帳號</label>
+            </div>
+            <div class="input-box">
+                <span class="icon"></span>
+                <input type="password" name="pwd" required>
+                <label>密碼</label>
+            </div>
+            <button type="submit" class="btn">登入</button>
+            <div class="login-register">
+                <p>沒有帳號嗎? <a href="/register" class="register-link"> 前往註冊!</a></p>
+            </div>
+
+        <!-- <form action="http://127.0.0.1:5000/login_check" method="POST">
+                帳號:<input type="text" name="id" id="id" ><br/>
+                密碼:<input type="password" name="pwd" id="pwd"><br/>
+                <input type="submit" name="login" value="登入">
+                <input type="button" name="clear" onclick="clearInput()" value="清除">
+        </form>
+        <form action="http://127.0.0.1:5000/register" method="POST">
+                <input type="submit" name="register" value="註冊">
+        </form> -->
+    </form>
+</body>
+
+</html>

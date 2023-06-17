@@ -1,0 +1,46 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='peoplec.css')}}">
+    <title>帳號註冊</title>        
+    <script>
+        function clearInput() {
+            var inputElement = document.getElementById('id');
+            inputElement.value = ''
+            var inputElement = document.getElementById('pwd');
+            inputElement.value = '';
+            var inputElement = document.getElementById('name');
+            inputElement.value = '';
+        }
+    </script>
+</head>      
+    <form action="/people_insert" method="POST">
+            <div class="form-box login">
+                <h2>註冊</h2>
+
+                <div class="input-box">
+                    <span class="icon"></span>
+                    <input type="account" name="id" required>
+                    <label>帳號</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"></span>
+                    <input type="password" name="pwd" required>
+                    <label>密碼</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"></span>
+                    <input type="text" name="name" required>
+                    <label>姓名</label>
+                </div>
+                <button type="submit" class="btn">申請帳號</button>
+                <div class="login-register">
+                    <p>有帳號嗎? <a href="/" class="register-link"> 回去登入!</a></p>
+                </div>
+        <!-- 帳號:<input type="text" name="id" id="id" ><br/> -->
+        <!-- 密碼:<input type="password" name="pwd" id="pwd"><br/> -->
+        <!-- 姓名:<input type="text" name="name" id="name"><br/> -->
+        <!-- <input type="submit" name="reg" value="申請"> -->
+        <!-- <input type="button" name="clear" onclick="clearInput()" value="清除"> -->
+    </form>
+</html>   

@@ -1,0 +1,110 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>投資組合詳細資訊</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='group.css')}}"> 
+    <!-- <link rel="stylesheet" href="group.css">     -->
+    <script>
+        console.log('hello word');
+        function checkItem(i,me) {
+            console.log('checkitem:'+i);
+            {% for row in group %}
+                index={{loop.index}}
+                
+                if (index==i){
+ 
+                        if (me.checked) {
+                            var item = document.getElementById("sid");
+                            item.value="{{row[0]}}";
+
+                            var item = document.getElementById("weight");
+                            console.log(item.value);
+                            item.value="{{row[2]}}";
+                            console.log(item.value);
+
+                        
+                        }else{
+                            var item = document.getElementById("sid");
+                            item.value="";
+              
+
+                            var item = document.getElementById("weight");
+                            item.value="";
+
+                        
+                        }
+                }
+             {%endfor%}
+
+        }
+    </script>
+</head>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+    </style>
+    <br>
+    <br>
+    <form action="/invest_query/{{data[2]}}" method="POST">
+        <input type="hidden" name="pid" value="{{data[2]}}">
+        <button type="submit" class="btn">回投資組合頁</button>
+    </form>
+    <div class="greet">
+        {{data[3]}}您好，以下為您的投資組合{{data[0]}}"{{data[1]}}"的內容：
+    </div>
+
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>股票代號</th>
+                    <th>股票名稱</th>
+                    <th>投資權重</th>
+                    <th>投資績效</th>
+                    <th>詳細資訊</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in group %}
+                <tr>
+                    <td><input type="radio" id="ck"+{{row[0]}} name="no" onclick="checkItem({{loop.index}},this)"></td>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}%</td>
+                    <td><a href="/stock_query/{{data[0]}},{{row[0]}}">詳細資訊</a></td>
+                    
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="divider">
+        <br>
+        <hr>
+        <br>
+            <form action="http://127.0.0.1:5000/group_proc" method="POST">
+                股票代號:<input type="text" name="sid" id="sid" ><br/>
+                投資權重:<input type="text" name="weight" id="weight" ><br/>
+                <input type="hidden" name="iid" value="{{data[0]}}">
+                <input type="hidden" name="iname" value="{{data[1]}}">
+                <input type="hidden" name="pid" value="{{data[2]}}">
+                <input type="hidden" name="pname" value="{{data[3]}}">
+                <input type="submit" name="insert" value="新增">
+                <input type="submit" name="update" value="修改">
+                <input type="submit" name="delete" value="刪除">
+                <!--<input type="submit" name="analyze" value="績效分析">-->
+            </form>
+            <img src="data:;base64,{{ img_stream }}">
+
+    </div>
+
+</html>   
