@@ -1,0 +1,40 @@
+<html>
+<head>
+    <script>
+        let selectedNo = null;
+        function checkItem(no) {
+            // alert(no);
+            selectedNo = no;
+        }
+        function editItem() {
+            alert(selectedNo);
+        }
+    </script>
+</head>    
+<body>
+    <input type="button" onClick="editItem()" value="Edit">
+    <table>
+        <th>
+            <td></td>
+            <td>No</td>
+            <td>Name</td>
+        </th>
+        <tr>
+            <td><input type="checkbox" id="no" name="no" onchange="checkItem('001')"></td>
+            <td>001</td>
+            <td>001</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" id="no" name="no" onchange="checkItem('002')"></td>
+            <td>002</td>
+            <td>002</td>
+        </tr>
+        
+    </table>
+    <form>
+        NO:<input type="text" name="no" ><br>
+        Name:<input type="text" name="name" ><br>
+        <input type="button" name="submit" value="submit" >
+    </form>
+</body>    
+</html>

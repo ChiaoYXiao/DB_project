@@ -1,0 +1,23 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>帳號註冊</title>        
+    <script>
+        function clearInput() {
+            var inputElement = document.getElementById('id');
+            inputElement.value = ''
+            var inputElement = document.getElementById('pwd');
+            inputElement.value = '';
+            var inputElement = document.getElementById('name');
+            inputElement.value = '';
+        }
+    </script>
+</head>      
+    <form action="http://127.0.0.1:5000/people_insert" method="POST">
+        帳號:<input type="text" name="id" id="id" ><br/>
+        密碼:<input type="password" name="pwd" id="pwd"><br/>
+        姓名:<input type="text" name="name" id="name"><br/>
+        <input type="submit" name="reg" value="申請">
+        <input type="button" name="clear" onclick="clearInput()" value="清除">
+    </form>
+</html>   

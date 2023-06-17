@@ -1,0 +1,115 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>投資組合清單</title>
+    <script>
+        console.log('hello word');
+        function checkItem(i,me) {
+            console.log('checkitem:'+i);
+            {% for row in invest %}
+                index={{loop.index}}
+                
+                if (index==i){
+                        
+                        console.log(index,i,"{{row[1]}}")
+                        if (me.checked) {
+                            var item = document.getElementById("iid");
+                            item.value="{{row[0]}}";
+
+                            var item = document.getElementById("name");
+                            item.value="{{row[1]}}";
+
+                            var item = document.getElementById("sdate");
+                            item.value="{{row[2]}}".split(" ")[0];
+
+                            var item = document.getElementById("edate");
+                            item.value="{{row[3]}}".split(" ")[0];
+
+                            var item = document.getElementById("profit");
+                            item.value="{{row[4]}}";
+
+                        
+                        }else{
+                            var item = document.getElementById("iid");
+                            item.value="";
+
+                            var item = document.getElementById("name");
+                            item.value="";                            
+
+                            var item = document.getElementById("sdate");
+                            item.value="";
+
+                            var item = document.getElementById("edate");
+                            item.value="";
+
+                            var item = document.getElementById("profit");
+                            item.value="";
+
+                        
+                        }
+                }
+             {%endfor%}
+
+        }
+    </script>
+</head>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+    </style>    
+    <form action="http://127.0.0.1:5000/people_setup" method="POST">
+        <input type="hidden" name="pid" value="{{data[0][0]}}">
+        <input type="hidden" name="pwd" value="{{data[0][1]}}">
+        <input type="hidden" name="name" value="{{data[0][2]}}">
+        <input type="submit" name="setup" value="帳號設定">
+  </form>    
+{{data[0][2]}}您好，以下為您的投資組合：
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>群組編號</th>
+            <th>群組名稱</th>
+            <th>投資起始日</th>
+            <th>投資終止日</th>
+            <th>投資績效</th>
+            <th>詳細資訊</th>
+        </tr>
+    </thead>
+    <tbody>
+        invest{{invest[0]}}
+        {% for row in invest %}
+        <tr>
+            <td><input type="checkbox" id="ck"+{{row[0]}} name="no" onclick="checkItem({{loop.index}},this)"></td>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}</td>
+            <td>{{row[5]}}%</td>
+            <td><a href="/group_query/{{row[0]}}">詳細資訊</a></td>
+            
+        </tr>
+        {%endfor%}
+    </tbody>
+    
+</table>
+
+<hr>
+    <form action="http://127.0.0.1:5000/invest_proc" method="POST">
+        群組編號:<input type="text" name="iid" id="iid" ><br/>
+        群組名稱:<input type="text" name="name" id="name"><br/>
+        投資起始日:<input type="date" name="sdate" id="sdate"><br/>
+        投資終止日:<input type="date" name="edate" id="edate"><br/>
+        <input type="hidden" name="pid" value="{{data[0][0]}}">
+        <input type="submit" name="insert" value="新增">
+        <input type="submit" name="update" value="修改">
+        <input type="submit" name="delete" value="刪除">
+    </form>
+
+</html>   

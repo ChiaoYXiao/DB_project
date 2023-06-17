@@ -1,0 +1,26 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>帳號登入</title>
+    <script>
+        function clearInput() {
+            var inputElement = document.getElementById('id');
+            inputElement.value = ''
+            var inputElement = document.getElementById('pwd');
+            inputElement.value = '';
+        }
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='template.css') }}">    
+</head> 
+<body>
+    <form action="http://127.0.0.1:5000/login_check" method="POST">
+        帳號:<input type="text" name="id" id="id" ><br/>
+        密碼:<input type="password" name="pwd" id="pwd"><br/>
+        <input type="submit" name="login" value="登入">
+        <input type="button" name="clear" onclick="clearInput()" value="清除">
+    </form>
+    <form action="http://127.0.0.1:5000/register" method="POST">
+        <input type="submit" name="register" value="註冊">
+    </form>
+</body>
+</html>    
